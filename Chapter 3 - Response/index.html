@@ -1,0 +1,40 @@
+<!DOCTYPE html>
+<html>
+	<head>
+	<title>Response</title>
+	<meta charset="UTF-8">
+	<script src="../../Libraries/jQuery Library/jquery.js" type="text/javascript"></script>
+	<link rel="stylesheet" href="../../Libraries/Bootstrap Library/css/bootstrap.min.css">
+	<script src="../../Libraries/Bootstrap Library/js/bootstrap.js"></script>
+	<script src="../../Libraries/Bootstrap Library/js/bootstrap.min.js"></script>
+	<script>
+	function loadDoc()
+	{
+		var xhttp, xmlDoc, x, i, txt;
+		xhttp = new XMLHttpRequest();
+		xhttp.onreadystatechange = function()
+		{
+			if(xhttp.readyState == 4 && xhttp.status == 200)
+			{
+				xmlDoc = xhttp.responseXML;
+				txt = "";
+				x = xmlDoc.getElementsByTagName("ARTIST");
+				for(i = 0; i < x.length; i++)
+				{
+					txt = txt + x[i].childNodes[0].nodeValue + "<br>";
+				}
+					document.getElementById("demo").innerHTML = txt;
+			}
+		};
+		xhttp.open("GET","cd_catalog.xml", true);
+		xhttp.send();
+	}
+	</script>
+	</head>
+		<body>
+		<h1>AJAX - Response</h1>
+		<h2>My CD Collection</h2>
+		<p id="demo"></p>
+		<button class="btn btn-success btn-lg" onclick="loadDoc()">Get CD Collection</button>
+		</body>
+</html>
